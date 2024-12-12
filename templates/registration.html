@@ -4,56 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
+ <div class="form-container">
     <h1>Registration Form</h1>
     <form method="POST" action="/">
-        <label for="Name">Full Name:</label>
-        <input type="text" id="Name" name="Name" required><br>
+          <!-- Step 1: Basic Information -->
+          <div class="step active" id="step-1">
+            <h3>Basic Information</h3>
+            <label for="Name">Full Name</label>
+            <input type="text" id="Name" name="Name" placeholder="Full Name" required><br>
 
-        <label for="Fname">Father's Name:</label>
-        <input type="text" id="Fname" name="Fname" required><br>
+            <label for="Fname">Father's Name</label>
+            <input type="text" id="Fname" name="Fname" placeholder="Father's Name" required><br>
 
-        <label for="Email">Email:</label>
-        <input type="email" id="Email" name="Email" required><br>
+            <label for="Email">Email</label>
+            <input type="email" id="Email" name="Email" placeholder="Email" required><br>
 
-        <label for="Address">Address:</label>
-        <input type="text" id="Address" name="Address" required><br>
+            <div class="navigation-btns">
+                <button type="button" class="btn" onclick="nextStep(1)">Next</button>
+            </div>
+        </div>
 
-        <label for="City">City:</label>
-        <input type="text" id="City" name="City" required><br>
+        <!-- Step 2: Address and Contact Information -->
+        <div class="step" id="step-2">
+            <h3>Address and Contact Information</h3>
+            <label for="Address">Address</label>
+            <input type="text" id="Address" name="Address" placeholder="Address" required><br>
 
-        <label for="State">State:</label>
-        <input type="text" id="State" name="State" required><br>
+            <label for="City">City</label>
+            <input type="text" id="City" name="City" placeholder="City" required><br>
 
-        <label for="Phone">Phone:</label>
-        <input type="text" id="Phone" name="Phone" required><br>
+            <label for="State">State</label>
+            <input type="text" id="State" name="State" placeholder="State" required><br>
 
-        <label for="Whatsapp">WhatsApp:</label>
-        <input type="text" id="Whatsapp" name="Whatsapp" required><br>
+            <label for="Phone">Phone</label>
+            <input type="text" id="Phone" name="Phone" placeholder="Phone" required><br>
 
-        <label for="GuardianPhone">Guardian Phone:</label>
-        <input type="text" id="GuardianPhone" name="GuardianPhone" required><br>
+            <label for="Whatsapp">WhatsApp Number</label>
+            <input type="text" id="Whatsapp" name="Whatsapp" placeholder="WhatsApp" required><br>
 
-        <label for="highschool">High School:</label>
-        <input type="text" id="highschool" name="highschool" required><br>
+            <label for="GuardianPhone">Guardian's Phone</label>
+            <input type="text" id="GuardianPhone" name="GuardianPhone" placeholder="Guardian's Phone"><br>
 
-        <label for="inter">Intermediate:</label>
-        <input type="text" id="inter" name="inter" required><br>
+            <div class="navigation-btns">
+                <button type="button" class="btn" onclick="prevStep(2)">Back</button>
+                <button type="button" class="btn" onclick="nextStep(2)">Next</button>
+            </div>
+        </div>
 
-        <label for="Graduation">Graduation:</label>
-        <input type="text" id="Graduation" name="Graduation" required><br>
+        <!-- Step 3: Educational Details -->
+        <div class="step" id="step-3">
+            <h3>Educational Details</h3>
+            <label for="highschool">High School (10th)</label>
+            <select id="highschool" name="highschool" required>
+                <option value="">Select</option>
+                <option value="Passed">Passed</option>
+                <option value="Appearing">Appearing</option>
+                <option value="N/A">N/A</option>
+            </select><br>
 
-        <label for="Course">Course:</label>
-        <input type="text" id="Course" name="Course" required><br>
+            <label for="inter">Intermediate (12th)</label>
+            <select id="inter" name="inter" required>
+                <option value="">Select</option>
+                <option value="Passed">Passed</option>
+                <option value="Appearing">Appearing</option>
+                <option value="N/A">N/A</option>
+            </select><br>
 
-        <label for="Gender">Gender:</label>
-        <input type="text" id="Gender" name="Gender" required><br>
+            <label for="Graduation">Graduation</label>
+            <select id="Graduation" name="Graduation" required>
+                <option value="">Select</option>
+                <option value="Passed">Passed</option>
+                <option value="Appearing">Appearing</option>
+                <option value="N/A">N/A</option>
+            </select><br>
 
-        <label for="Sign">Signature:</label>
-        <input type="text" id="Sign" name="Sign" required><br>
+            <div class="navigation-btns">
+                <button type="button" class="btn" onclick="prevStep(3)">Back</button>
+                <button type="button" class="btn" onclick="nextStep(3)">Next</button>
+            </div>
+        </div>
 
-        <button type="submit">Send OTP</button>
+        <!-- Step 4: Final Details -->
+        <div class="step" id="step-4">
+            <h3>Final Details</h3>
+            <label for="Course">Course Applied For</label>
+            <select id="Course" name="Course" required onchange="showOtherCourseField()">
+                <option value="">Select</option>
+                <option value="c">C</option>
+                <option value="Web Designning">Web Designning</option>
+                <option value="ADCA">ADCA</option>
+                <option value="Hi-En typing">Hi-En typing</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="English Speaking">English Speaking</option>
+                <option value="Basic">Basic</option>
+                <option value="Blue J">Blue J</option>
+                <option value="ITI">ITI</option>
+                <option value="languages">languages</option>
+                <option value="Java">Java</option>
+                <option value="Adv Excel">Adv Excel</option>
+                <option value="HTML">HTML</option>
+                <option value="C++">C++</option>
+                <option value="Python">Python</option>
+                <option value="O Level">O Level</option>
+                <option value="ADFA">ADFA</option>
+                <option value="CCC">CCC</option>
+                <option value="Corel Draw">Corel Draw</option>
+                <option value="Photoshop">Photoshop</option>
+                <option value="Tally">Tally</option>
+                <option value="Polytechnic">Polytechnic</option>
+                <option value="B.Tech">B.Tech</option>
+                <option value="BCA">BCA</option>
+                <option value="BBA">BBA</option>
+                <option value="B.Pharma">B.Pharma</option>
+                <option value="D.Pharma">D.Pharma</option>
+                <option value="ANM">ANM</option>
+                <option value="GNM">GNM</option>
+                <option value="B.Sc Nursing">B.Sc Nursing</option>
+                <option value="LLB">LLB</option>
+                <option value="LAB Tech">LAB Tech</option>
+                <option value="MBA">MBA</option>
+                <option value="MBBS">MBBS</option>
+                <option value="B.ED">B.ED</option>
+                <option value="D.EL.ED">D.EL.ED</option>
+                <option value="BMLT">BMLT</option>
+                <option value="DMLT">DMLT</option>
+                <option value="Pharm D">Pharm D</option>
+                <option value="Other">Other</option>
+            </select><br>
+<!-- New field for 'Other' course choice -->
+<div id="otherCourseField">
+    <label for="OtherCourse">Write your choice</label>
+    <input type="text" id="OtherCourse" name="OtherCourse" placeholder="Other Course" />
+</div>
+            <label for="Gender">Gender</label>
+            <select id="Gender" name="Gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select><br>
+
+            <!-- <label for="Sign">Signature</label>
+            <input type="text" id="Sign" name="Sign" placeholder="Signature" required><br> -->
+
+            <label for="registrationNumber">Registration Number</label>
+            <input type="text" id="registrationNumber" name="registrationNumber" placeholder="After Registration You Will Get" readonly><br>
+
+            <div class="navigation-btns">
+                <button type="button" class="btn" onclick="prevStep(4)">Back</button>
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </div>
+        <!-- <button type="submit">Send OTP</button> -->
     </form>
+ </div>
+    <script src="/static/js/script.js"></script>
 </body>
 </html>

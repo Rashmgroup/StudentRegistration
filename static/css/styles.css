@@ -1,0 +1,351 @@
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #6e7cfc, #20b1aa); /* Gradient background */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  height: 100vh;  /* Ensure full viewport height */
+}
+.form-container {
+    background-color: #fff;
+    width: 100%;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-out;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    animation: slideInFromTop 1s ease-out;
+  }
+  
+  .step {
+    display: none;
+    animation: fadeInStep 1s ease-out;
+  }
+  
+  .step.active {
+    display: block;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+    transition: color 0.3s;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  select:focus {
+    border-color: #20b1aa;
+    outline: none;
+    box-shadow: 0 0 8px rgba(32, 177, 170, 0.4);
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #20b1aa;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .btn:hover {
+    background-color: #17a089;
+    transform: translateY(-2px);
+    /* Slight lift on hover */
+  }
+  
+  .btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .navigation-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    animation: slideInFromBottom 1s ease-out;
+  }
+  
+  .popup,
+  .confirmation-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    text-align: center;
+    animation: scaleIn 0.5s ease-out;
+  }
+  
+  .confirmation-popup h2 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .confirmation-popup p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .confirmation-popup button {
+    padding: 12px 25px;
+    background-color: #20b1aa;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .confirmation-popup button:hover {
+    background-color: #17a089;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideInFromTop {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+  
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+  
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInStep {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+  
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      padding: 10px;
+    }
+  
+    .form-container {
+      padding: 15px;
+      width: 100%;
+      /* Ensure the form is as wide as the viewport */
+      max-width: none;
+      /* Remove the max-width for very small screens */
+    }
+  
+    h2 {
+      font-size: 20px;
+    }
+  
+    label {
+      font-size: 12px;
+      /* Smaller font for labels */
+    }
+  
+    input,
+    select {
+      font-size: 14px;
+      /* Smaller input fields for mobile */
+      padding: 8px;
+      /* Adjust padding for smaller screens */
+    }
+  
+    .btn {
+      font-size: 14px;
+      /* Smaller button text for mobile */
+      padding: 10px 20px;
+      /* Adjust button padding */
+    }
+  
+    .navigation-btns {
+      flex-direction: column;
+      /* Stack navigation buttons vertically */
+      align-items: center;
+    }
+  
+    .popup,
+    .confirmation-popup {
+      width: 90%;
+      /* Make popups take up more space on small screens */
+      max-width: 350px;
+      /* Limit the max-width to avoid over-stretching */
+      padding: 20px;
+    }
+  }
+  
+  /* For medium screens (up to 768px, tablets and smaller laptops) */
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+  
+    .form-container {
+      padding: 20px;
+      width: 100%;
+      max-width: 90%;
+      /* Limit max-width to 90% */
+    }
+  
+    h2 {
+      font-size: 22px;
+    }
+  
+    label {
+      font-size: 13px;
+    }
+  
+    input,
+    select {
+      font-size: 15px;
+      /* Adjust input font size */
+      padding: 9px;
+      /* Adjust padding */
+    }
+  
+    .btn {
+      font-size: 15px;
+      padding: 10px 20px;
+    }
+  
+    .navigation-btns {
+      flex-direction: column;
+      /* Stack buttons vertically on smaller devices */
+      align-items: center;
+    }
+  
+    .popup,
+    .confirmation-popup {
+      width: 80%;
+      /* Popups will take 80% of the screen width */
+      max-width: 400px;
+      /* Limit max width */
+      padding: 25px;
+    }
+  }
+  
+  /* For larger screens (from 769px upwards) */
+  @media (min-width: 769px) {
+    .form-container {
+      max-width: 800px;
+      /* Keep original max-width on larger screens */
+    }
+  
+    h2 {
+      font-size: 24px;
+    }
+  
+    label {
+      font-size: 14px;
+    }
+  
+    input,
+    select {
+      font-size: 16px;
+      padding: 10px;
+    }
+  
+    .btn {
+      font-size: 16px;
+      padding: 12px 25px;
+    }
+  
+    .navigation-btns {
+      flex-direction: row;
+      /* Arrange buttons side by side on larger screens */
+      justify-content: space-between;
+    }
+  
+    .popup,
+    .confirmation-popup {
+      width: 400px;
+      /* Keep popups narrower on larger screens */
+      padding: 30px;
+    }
+  }
+  
+  /* Responsive Styling
+  @media (max-width: 768px) {
+      .form-container {
+          padding: 20px;
+          width: 90%;
+      }
+  } */
+

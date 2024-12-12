@@ -4,14 +4,14 @@ import random
 import os
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"
+app.secret_key = "aryanmaurya01"
 
 # Flask-Mail configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'rashmgroup@gmail.com'  # Replace with your email
-app.config['MAIL_PASSWORD'] = 'your_email_password'   # Replace with your email's app password
+app.config['MAIL_USERNAME'] = 'rashmgroup@gmail.com'
+app.config['MAIL_PASSWORD'] = 'cgyj wqby pxen nged'  # Replace with your app-specific password
 app.config['MAIL_DEFAULT_SENDER'] = 'rashmgroup@gmail.com'
 
 mail = Mail(app)
@@ -35,7 +35,7 @@ def registration_form():
         graduation = request.form.get("Graduation")
         course = request.form.get("Course")
         gender = request.form.get("Gender")
-        signature = request.form.get("Sign")
+        OtherCourse = request.form.get("OtherCourse") if course == "Other" else None  # Get the OtherCourse value only if "Other" is selected
 
         # Generate OTP
         otp = random.randint(100000, 999999)
@@ -57,8 +57,8 @@ def registration_form():
             'inter': inter,
             'graduation': graduation,
             'course': course,
+            'OtherCourse': OtherCourse,  # Save the OtherCourse value
             'gender': gender,
-            'signature': signature
         }
 
         # Send OTP email
@@ -88,36 +88,39 @@ def validate_otp():
             # Generate registration number
             registration_number = f"2024-{random.randint(100000, 999999)}"
 
-            # Email content
+            # Email content (HTML)
             email_body = f"""
-            Registration Successful!
-            
-            Name: {registration_data['full_name']}
-            Father's Name: {registration_data['father_name']}
-            Email: {registration_data['email']}
-            Address: {registration_data['address']}, {registration_data['city']}, {registration_data['state']}
-            Phone: {registration_data['phone']}
-            WhatsApp: {registration_data['whatsapp']}
-            Guardian Phone: {registration_data['guardian_phone']}
-            High School: {registration_data['highschool']}
-            Intermediate: {registration_data['inter']}
-            Graduation: {registration_data['graduation']}
-            Course Applied: {registration_data['course']}
-            Gender: {registration_data['gender']}
-            Signature: {registration_data['signature']}
-            Registration Number: {registration_number}
+            <html>
+              <body>
+                <h1>Registration Successful!</h1>
+                <p><strong>Name:</strong> {registration_data['full_name']}</p>
+                <p><strong>Father's Name:</strong> {registration_data['father_name']}</p>
+                <p><strong>Email:</strong> {registration_data['email']}</p>
+                <p><strong>Address:</strong> {registration_data['address']}, {registration_data['city']}, {registration_data['state']}</p>
+                <p><strong>Phone:</strong> {registration_data['phone']}</p>
+                <p><strong>WhatsApp:</strong> {registration_data['whatsapp']}</p>
+                <p><strong>Guardian Phone:</strong> {registration_data['guardian_phone']}</p>
+                <p><strong>High School:</strong> {registration_data['highschool']}</p>
+                <p><strong>Intermediate:</strong> {registration_data['inter']}</p>
+                <p><strong>Graduation:</strong> {registration_data['graduation']}</p>
+                <p><strong>Course Applied:</strong> {registration_data['course']}</p>
+                {"<p><strong>Other Course:</strong> " + registration_data['OtherCourse'] + "</p>" if registration_data['OtherCourse'] else ""}
+                <p><strong>Gender:</strong> {registration_data['gender']}</p>
+                <p><strong>Registration Number:</strong> {registration_number}</p>
+              </body>
+            </html>
             """
 
             try:
                 # Send registration confirmation email to user
                 msg = Message("Registration Confirmation", recipients=[registration_data['email']])
-                msg.body = email_body
+                msg.html = email_body  # Use HTML format for the message
                 mail.send(msg)
                 flash(f"Registration successful! A confirmation email has been sent to {registration_data['email']}.", "success")
 
                 # Send a copy of the registration to admin
                 msg = Message("New Student Registration", recipients=["rashmgroup@gmail.com"])  # Admin email
-                msg.body = email_body
+                msg.html = email_body  # Send email to admin with HTML content
                 mail.send(msg)
             except Exception as e:
                 flash(f"Error sending confirmation email: {e}", "danger")
@@ -126,11 +129,16 @@ def validate_otp():
             session.pop('otp', None)
             session.pop('registration_data', None)
 
-            return redirect(url_for("registration_form"))
+            return redirect(url_for("thank_you"))  # Redirect to Thank You page
         else:
             flash("Invalid OTP. Please try again.", "danger")
 
     return render_template("validate_otp.html")
+
+
+@app.route("/thank-you")
+def thank_you():
+    return render_template("thank_you.html")
 
 
 if __name__ == "__main__":
