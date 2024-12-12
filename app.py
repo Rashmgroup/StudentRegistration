@@ -89,27 +89,115 @@ def validate_otp():
             registration_number = f"2024-{random.randint(100000, 999999)}"
 
             # Email content (HTML)
-            email_body = f"""
-            <html>
-              <body>
-                <h1>Registration Successful!</h1>
-                <p><strong>Name:</strong> {registration_data['full_name']}</p>
-                <p><strong>Father's Name:</strong> {registration_data['father_name']}</p>
-                <p><strong>Email:</strong> {registration_data['email']}</p>
-                <p><strong>Address:</strong> {registration_data['address']}, {registration_data['city']}, {registration_data['state']}</p>
-                <p><strong>Phone:</strong> {registration_data['phone']}</p>
-                <p><strong>WhatsApp:</strong> {registration_data['whatsapp']}</p>
-                <p><strong>Guardian Phone:</strong> {registration_data['guardian_phone']}</p>
-                <p><strong>High School:</strong> {registration_data['highschool']}</p>
-                <p><strong>Intermediate:</strong> {registration_data['inter']}</p>
-                <p><strong>Graduation:</strong> {registration_data['graduation']}</p>
-                <p><strong>Course Applied:</strong> {registration_data['course']}</p>
-                {"<p><strong>Other Course:</strong> " + registration_data['OtherCourse'] + "</p>" if registration_data['OtherCourse'] else ""}
-                <p><strong>Gender:</strong> {registration_data['gender']}</p>
-                <p><strong>Registration Number:</strong> {registration_number}</p>
-              </body>
-            </html>
-            """
+            # email_body = f"""
+            # <html>
+            #   <body>
+            #     <h1>Registration Successful!</h1>
+            #     <p><strong>Name:</strong> {registration_data['full_name']}</p>
+            #     <p><strong>Father's Name:</strong> {registration_data['father_name']}</p>
+            #     <p><strong>Email:</strong> {registration_data['email']}</p>
+            #     <p><strong>Address:</strong> {registration_data['address']}, {registration_data['city']}, {registration_data['state']}</p>
+            #     <p><strong>Phone:</strong> {registration_data['phone']}</p>
+            #     <p><strong>WhatsApp:</strong> {registration_data['whatsapp']}</p>
+            #     <p><strong>Guardian Phone:</strong> {registration_data['guardian_phone']}</p>
+            #     <p><strong>High School:</strong> {registration_data['highschool']}</p>
+            #     <p><strong>Intermediate:</strong> {registration_data['inter']}</p>
+            #     <p><strong>Graduation:</strong> {registration_data['graduation']}</p>
+            #     <p><strong>Course Applied:</strong> {registration_data['course']}</p>
+            #     {"<p><strong>Other Course:</strong> " + registration_data['OtherCourse'] + "</p>" if registration_data['OtherCourse'] else ""}
+            #     <p><strong>Gender:</strong> {registration_data['gender']}</p>
+            #     <p><strong>Registration Number:</strong> {registration_number}</p>
+            #   </body>
+            # </html>
+            # """
+email_body = f"""
+<html>
+  <head>
+    <style>
+      /* Basic Email Styling */
+      body {{
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        margin: 0;
+        padding: 0;
+      }}
+      
+      .container {{
+        background-color: white;
+        width: 80%;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }}
+
+      h1 {{
+        color: #4CAF50;
+        text-align: center;
+      }}
+      
+       h2 {{
+        color: #198dec;
+        text-align: center;
+      }}
+
+      p {{
+        font-size: 1.1em;
+        margin: 10px 0;
+        color: #333;
+      }}
+
+      strong {{
+        color: #4CAF50;
+      }}
+      
+         .footer {{
+        text-align: center;
+        margin-top: 20px;
+        font-size: 12px;
+        color: #888;
+      }}
+      
+      /* Responsive Design */
+      @media (max-width: 600px) {{
+        h1 {{
+          font-size: 2em;
+        }}
+        p {{
+          font-size: 1em;
+        }}
+      }}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Registration Successful!</h1>
+      <h2>Rashm Roadmap Foundation!</h2>
+      <p><strong>Name:</strong> {registration_data['full_name']}</p>
+      <p><strong>Father's Name:</strong> {registration_data['father_name']}</p>
+      <p><strong>Email:</strong> {registration_data['email']}</p>
+      <p><strong>Address:</strong> {registration_data['address']}, {registration_data['city']}, {registration_data['state']}</p>
+      <p><strong>Phone:</strong> {registration_data['phone']}</p>
+      <p><strong>WhatsApp:</strong> {registration_data['whatsapp']}</p>
+      <p><strong>Guardian Phone:</strong> {registration_data['guardian_phone']}</p>
+      <p><strong>High School:</strong> {registration_data['highschool']}</p>
+      <p><strong>Intermediate:</strong> {registration_data['inter']}</p>
+      <p><strong>Graduation:</strong> {registration_data['graduation']}</p>
+      <p><strong>Course Applied:</strong> {registration_data['course']}</p>
+      {f"<p><strong>Other Course:</strong> {registration_data['OtherCourse']}</p>" if registration_data['OtherCourse'] else ""}
+      <p><strong>Gender:</strong> {registration_data['gender']}</p>
+      <p><strong>Registration Number:</strong> {registration_number}</p>
+      <br>
+    <div class="footer">
+        <p>Thank you for registering with us!</p>
+        <br>
+        <p>Copyright © All rights reserved | This template is made with ❤ by Aryan Maurya</p>
+      </div>
+    </div>
+  </body>
+</html>
+"""
 
             try:
                 # Send registration confirmation email to user
